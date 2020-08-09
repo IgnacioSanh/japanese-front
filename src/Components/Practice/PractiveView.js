@@ -10,8 +10,6 @@ import { Switch, Route, Link } from "react-router-dom";
 // Own creation
 import WordPractice from "./wordPractice";
 import Scoreboard from "./Score";
-import PreviousQuestions from "./previousQuestions";
-import { makeStyles } from "@material-ui/core/styles";
 
 class PracticeView extends Component {
   state = {
@@ -55,35 +53,30 @@ class PracticeView extends Component {
     const { scoreArray } = this.state;
     const { open, message, severity } = this.state.toast;
     return (
-      <div className={classes.greaterDiv}>
+      <div styles={{ flexGrow: 1 }}>
         <CssBaseline />
-        <Grid container direction="row" spacing={2}>
+        <Grid container direction="column" spacing={2}>
+          <Hidden xsDown={true}>
+            <Grid item xs={12}>
+              <Typography variant="h2">Practice</Typography>
+            </Grid>
+          </Hidden>
           <Grid item xs={12} sm={6}>
-            <PreviousQuestions />
+            <Scoreboard score={scoreArray} />
           </Grid>
-          <Grid container item direction="column" xs={12} sm={6} spacing={3}>
-            {/* <Hidden xsDown={true}>
-              <Grid item xs={12}>
-                <Typography variant="h2">Practice</Typography>
-              </Grid>
-            </Hidden> */}
-            <Grid item>
-              <Scoreboard score={scoreArray} />
-            </Grid>
-            <Grid item>
-              <Switch>
-                <Route
-                  path="/practice/:mode"
-                  render={() => (
-                    <WordPractice
-                      setScore={this.setScore}
-                      resetScore={this.resetScore}
-                    />
-                  )}
-                ></Route>
-                <Route path="/practice" exact component={PracticeMenu}></Route>
-              </Switch>
-            </Grid>
+          <Grid item xs={12} sm={6}>
+            <Switch>
+              <Route
+                path="/practice/:mode"
+                render={() => (
+                  <WordPractice
+                    setScore={this.setScore}
+                    resetScore={this.resetScore}
+                  />
+                )}
+              ></Route>
+              <Route path="/practice" exact component={PracticeMenu}></Route>
+            </Switch>
           </Grid>
         </Grid>
         <Toast open={open} message={message} severity={severity} />

@@ -18,13 +18,13 @@ const useStyles = makeStyles((theme) => ({
 
 const Scoreboard = ({ score }) => {
   return (
-    <div>
+    <Paper elevation={0}>
       <Grid container spacing={2}>
         <ScoreBox title="Correct" score={score[0]} />
         <ScoreBox title="Wrong" score={score[1]} />
         <ScoreBox title="Strike" score={score[2]} />
       </Grid>
-    </div>
+    </Paper>
   );
 };
 
